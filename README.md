@@ -11,6 +11,18 @@ Alien Swarm SDK.
 Documentation on the editor itself can be found here:
 http://developer.valvesoftware.com/wiki/Category:SourceShaderEditor
 
+NOTES FROM THEMASTER974
+-----------------------
+
+This fork of the Source Shader Editor is intended to be used to acquire the shadereditor_2013.dll
+and game_shader_dx6.dll files that are needed for the editor to work. I have made some minor
+changes to this repository to get the editor projects made on Linux, however these will not
+compile at this point in time. Please refer to these videos for further information regarding
+the implementation, basic usage and issues with the editor (the rest of the README and repo
+will be left unmodified unless there are fixes that are brought to my attention):
+
+https://youtu.be/xwcLP36vWHw and https://youtu.be/8NCB_LxtbcY
+
 USAGE:
 --------------
 
