@@ -1,7 +1,7 @@
 
 $Include "$SRCDIR\vpc_scripts\version.vpc"
 $Include "$SRCDIR\vpc_scripts\source_posix_base.vpc"
-
+$Include "$SRCDIR\shadereditor_platform.vpc"
 
 $MacroRequired	 "OUTBINNAME"	"$PROJECTNAME"
 $MacroRequired	 "OUTBINDIR"	"$SRCDIR\..\game\bin"
@@ -32,7 +32,7 @@ $Project
 {
 	$Folder	"Source Files"
 	{
-		$File	"$SRCDIR\public\tier0\memoverride.cpp"
+		$File	"$TARGET_SRC_DIRECTORY\public\tier0\memoverride.cpp"
 		{
 			$Configuration
 			{
