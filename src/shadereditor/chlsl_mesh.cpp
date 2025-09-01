@@ -142,7 +142,7 @@ void CHLSL_Mesh::CreateCylinder( float size, int subdiv )
 			CHLSL_Vertex &vert = m_Vertices[ vindex ];
 
 			Vector2D uv;
-			Vector pos = height;
+			pos = height;
 
 			if ( v_u > 0 )
 			{

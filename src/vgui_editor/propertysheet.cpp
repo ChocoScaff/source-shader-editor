@@ -374,7 +374,7 @@ public:
 				if ( !m_pParent->IsWithin( screenx, screeny ) )
 				{
 					Panel *page = reinterpret_cast< Panel * >( data->GetPtr( "propertypage" ) );
-					PropertySheet *sheet = reinterpret_cast< PropertySheet * >( data->GetPtr( "propertysheet" ) );
+					sheet = reinterpret_cast< PropertySheet * >( data->GetPtr( "propertysheet" ) );
 					char const *title = data->GetString( "tabname", "" );
 					if ( !page || !sheet )
 						return;
@@ -1445,7 +1445,7 @@ void PropertySheet::PerformLayout()
 		for (int i = 0; i < limit; i++)
 		{
 
-            int width, tall;
+            int width;
             m_PageTabs[i]->GetSize(width, tall);
 			if (m_PageTabs[i] == _activeTab)
 			{

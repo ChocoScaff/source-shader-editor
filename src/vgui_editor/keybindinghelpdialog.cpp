@@ -225,123 +225,120 @@ struct ListInfo_t
 void CKeyBindingHelpDialog::PopulateList()
 {
 	m_pList->DeleteAllItems();
-
 	int i, j;
-
+	int c, k;
 	CUtlVector< ListInfo_t > maps;
-	vgui::Panel *pPanel = m_hPanel;
-	while ( pPanel->IsKeyBindingChainToParentAllowed() )
+	vgui::Panel* pPanel = m_hPanel;
+	while (pPanel->IsKeyBindingChainToParentAllowed())
 	{
-		PanelKeyBindingMap *map = pPanel->GetKBMap();
-		while ( map )
+		PanelKeyBindingMap* map = pPanel->GetKBMap();
+		while (map)
 		{
-			int k;
-			int c = maps.Count();
-			for ( k = 0; k < c; ++k )
+			c = maps.Count();
+			for (k = 0; k < c; ++k)
 			{
-				if ( maps[k].m_pMap == map )
+				if (maps[k].m_pMap == map)
 					break;
 			}
-			if ( k == c )
+			if (k == c)
 			{
-				int k = maps.AddToTail( );
+				k = maps.AddToTail();
 				maps[k].m_pMap = map;
 				maps[k].m_pPanel = pPanel;
 			}
 			map = map->baseMap;
 		}
-
 		pPanel = pPanel->GetParent();
-		if ( !pPanel )
+		if (!pPanel)
 			break;
 	}
 
-	CUtlRBTree< KeyValues *, int >	sorted( 0, 0, BindingLessFunc );
+	CUtlRBTree< KeyValues*, int >	sorted(0, 0, BindingLessFunc);
 
 	// add header item
-	int c = maps.Count();
-	for ( i = 0; i < c; ++i )
+	c = maps.Count();
+	for (i = 0; i < c; ++i)
 	{
-		PanelKeyBindingMap *m = maps[ i ].m_pMap;
-		Panel *pPanel = maps[i].m_pPanel;
-		Assert( m );
+		PanelKeyBindingMap* m = maps[i].m_pMap;
+		pPanel = maps[i].m_pPanel;
+		Assert(m);
 
 		int bindings = m->boundkeys.Count();
-		for ( j = 0; j < bindings; ++j )
+		for (j = 0; j < bindings; ++j)
 		{
-			BoundKey_t *kbMap = &m->boundkeys[ j ];
-			Assert( kbMap );
+			BoundKey_t* kbMap = &m->boundkeys[j];
+			Assert(kbMap);
 
 			// Create a new: blank item
-			KeyValues *item = new KeyValues( "Item" );
-			
+			KeyValues* item = new KeyValues("Item");
+
 			// Fill in data
-			char loc[ 128 ];
-			Q_snprintf( loc, sizeof( loc ), "#%s", kbMap->bindingname );
+			char loc[128];
+			Q_snprintf(loc, sizeof(loc), "#%s", kbMap->bindingname);
 
-			char ansi[ 256 ];
-			AnsiText( loc, ansi, sizeof( ansi ) );
+			char ansi[256];
+			AnsiText(loc, ansi, sizeof(ansi));
 
-			item->SetString( "Action", ansi );
-			item->SetWString( "Binding", Panel::KeyCodeModifiersToDisplayString( (KeyCode)kbMap->keycode, kbMap->modifiers ) );
+			item->SetString("Action", ansi);
+			item->SetWString("Binding", Panel::KeyCodeModifiersToDisplayString((KeyCode)kbMap->keycode, kbMap->modifiers));
 
 			// Find the binding
-			KeyBindingMap_t *bindingMap = pPanel->LookupBinding( kbMap->bindingname );
-			if ( bindingMap && 
-				 bindingMap->helpstring )
+			KeyBindingMap_t* bindingMap = pPanel->LookupBinding(kbMap->bindingname);
+			if (bindingMap &&
+				bindingMap->helpstring)
 			{
-				AnsiText( bindingMap->helpstring, ansi, sizeof( ansi ) );
-				item->SetString( "Description", ansi );
+				AnsiText(bindingMap->helpstring, ansi, sizeof(ansi));
+				item->SetString("Description", ansi);
 			}
-			
-			item->SetPtr( "Item", kbMap );			
 
-			sorted.Insert( item );
+			item->SetPtr("Item", kbMap);
+
+			sorted.Insert(item);
 		}
 
 		// Now try and find any "unbound" keys...
 		int mappings = m->entries.Count();
-		for ( j = 0; j < mappings; ++j )
+		for (j = 0; j < mappings; ++j)
 		{
-			KeyBindingMap_t *kbMap = &m->entries[ j ];
+			KeyBindingMap_t* kbMap = &m->entries[j];
 
 			// See if it's bound
-			CUtlVector< BoundKey_t * > list;
-			pPanel->LookupBoundKeys( kbMap->bindingname, list );
-			if ( list.Count() > 0 )
+			CUtlVector< BoundKey_t* > list;
+			pPanel->LookupBoundKeys(kbMap->bindingname, list);
+			if (list.Count() > 0)
 				continue;
 
 			// Not bound, add a placeholder entry
 			// Create a new: blank item
-			KeyValues *item = new KeyValues( "Item" );
-			
+			KeyValues* item = new KeyValues("Item");
+
 			// fill in data
-			char loc[ 128 ];
-			Q_snprintf( loc, sizeof( loc ), "#%s", kbMap->bindingname );
+			char loc[128];
+			Q_snprintf(loc, sizeof(loc), "#%s", kbMap->bindingname);
 
-			char ansi[ 256 ];
-			AnsiText( loc, ansi, sizeof( ansi ) );
+			char ansi[256];
+			AnsiText(loc, ansi, sizeof(ansi));
 
-			item->SetString( "Action", ansi );
-			item->SetWString( "Binding", L"" );
-			if ( kbMap->helpstring )
+			item->SetString("Action", ansi);
+			item->SetWString("Binding", L"");
+			if (kbMap->helpstring)
 			{
-				AnsiText( kbMap->helpstring, ansi, sizeof( ansi ) );
-				item->SetString( "Description", ansi );
+				AnsiText(kbMap->helpstring, ansi, sizeof(ansi));
+				item->SetString("Description", ansi);
 			}
 
-			item->SetPtr( "Unbound", kbMap );						
+			item->SetPtr("Unbound", kbMap);
 
-			sorted.Insert( item );
+			sorted.Insert(item);
 		}
 	}
 
-	for ( j = sorted.FirstInorder() ; j != sorted.InvalidIndex(); j = sorted.NextInorder( j ) )
+	for (j = sorted.FirstInorder(); j != sorted.InvalidIndex(); j = sorted.NextInorder(j))
 	{
-		KeyValues *item = sorted[ j ];
+		KeyValues* item = sorted[j];
 
 		// Add to list
-		m_pList->AddItem( item, 0, false, false );
+		m_pList->AddItem(item, 0, false, false);
 
 		item->deleteThis();
 	}

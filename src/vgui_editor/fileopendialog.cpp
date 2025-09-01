@@ -1097,7 +1097,7 @@ void FileOpenDialog::ValidatePath()
 #endif
 	{
 		// directory is valid, remove * and store
-		char *pos = strrchr(pData, '*');
+		pos = strrchr(pData, '*');
 		if (pos)
 		{
 			*pos = 0;
@@ -1283,7 +1283,7 @@ void FileOpenDialog::BeginIterate( const char *szDir, const char *pszFilter, Lis
 			}
 		}
 
-		const char *tmpFile = g_pFullFileSystem->FindNext( _handle );
+		tmpFile = g_pFullFileSystem->FindNext( _handle );
 		if ( tmpFile )
 			Q_strncpy( curFile, tmpFile, sizeof(curFile) );
 		else

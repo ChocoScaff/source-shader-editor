@@ -258,7 +258,7 @@ void CSheet_Custom::CheckButtonChecked( KeyValues *pKV )
 
 	if ( p == m_pCheck_Inline )
 	{
-		Panel *p = FindChildByName( "button_save" );
+		p = FindChildByName( "button_save" );
 		if ( p )
 			p->SetEnabled( !bChecked );
 		p = FindChildByName( "button_load" );

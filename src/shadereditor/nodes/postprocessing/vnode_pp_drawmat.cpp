@@ -80,7 +80,7 @@ int CNodePP_DrawMat::UpdateInputsValid()
 	int baseerror = BaseClass::UpdateInputsValid();
 
 	int localerror = ( GetJack_In(0)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE;
-	localerror = max( ( GetJack_In(1)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE, localerror );
+	localerror = MAX( ( GetJack_In(1)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE, localerror );
 
 	return max( baseerror, localerror );
 }

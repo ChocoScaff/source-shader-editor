@@ -548,8 +548,8 @@ public:
 					image = GetImageAtIndex(i);
 				}
 
-				int imageWide = 0, tall = 0;
-				int wide;
+				int imageWide = 0;
+				tall = 0;
 				if (image)
 				{
 					image->GetContentSize(imageWide, tall);

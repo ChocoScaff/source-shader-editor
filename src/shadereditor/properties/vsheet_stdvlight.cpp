@@ -30,6 +30,9 @@ void CSheet_Std_VLight::OnApplyChanges()
 
 void CSheet_Std_VLight::OnCheckButtonChecked( KeyValues *pData )
 {
+	if (!pData)
+		return;
+
 	Panel *pCaller = ((Panel*)pData->GetPtr( "panel" ));
 	bool bState = ( pData->GetInt( "state" ) != 0 );
 

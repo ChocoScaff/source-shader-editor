@@ -83,8 +83,8 @@ int CNodePP_RenderView::UpdateInputsValid()
 	const int baseerror = BaseClass::UpdateInputsValid();
 
 	int localerror = ( GetJack_In(0)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE;
-	localerror = max( localerror, ( GetJack_In(1)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE );
-	localerror = max( localerror,
+	localerror = MAX( localerror, ( GetJack_In(1)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE );
+	localerror = MAX( localerror,
 						(m_ViewRenderData->GetName() == NULL || GetPPCache()->FindVrCallback( m_ViewRenderData->GetName() ) < 0) ?
 						ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE );
 

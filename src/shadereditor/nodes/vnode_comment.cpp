@@ -137,7 +137,6 @@ bool CNodeComment::VguiDraw( bool bShadow )
 		box_max += offset;
 	}
 
-	const bool bSelected = IsSelected();
 
 	//else
 	//{

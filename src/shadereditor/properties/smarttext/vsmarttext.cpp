@@ -1544,7 +1544,7 @@ void CSmartText::CalcSmartTabs( int y, bool bOnTyping )
 					{
 						MoveCursor( -1, 0, false, false, &bracketClose );
 
-						bool bSkipLine = IsCommented( bracketClose.x, bracketClose.y );
+						bSkipLine = IsCommented( bracketClose.x, bracketClose.y );
 						if ( !bSkipLine )
 						{
 							for ( int i = 0; i < hRows[bracketClose.y]->Read().Count(); i++ )
@@ -2021,11 +2021,11 @@ void CSmartText::UpdateTopFormats( bool bDoHighlights )
 
 		if ( bValid && CanRead( &bracketHighlight ) )
 		{
-			const wchar_t &cur = Read(&bracketHighlight); //hRows[ bracketHighlight.y ]->Read()[ bracketHighlight.x ];
+			const wchar_t &cur2 = Read(&bracketHighlight); //hRows[ bracketHighlight.y ]->Read()[ bracketHighlight.x ];
 
-			if ( IS_BRACKET_SAME_TYPE( ref, cur ) )
+			if ( IS_BRACKET_SAME_TYPE( ref, cur2) )
 			{
-				iBracketCounter += IS_BRACKET_OPENING( cur ) ? 1 : -1;
+				iBracketCounter += IS_BRACKET_OPENING(cur2) ? 1 : -1;
 			}
 		}
 

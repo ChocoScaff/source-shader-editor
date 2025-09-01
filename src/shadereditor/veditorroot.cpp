@@ -648,7 +648,7 @@ void CEditorRoot::OnThink(void)
 	_timer.End();
 	double _frametime = _timer.GetDuration().GetSeconds();
 	_timer.Start();
-	m_pLabel_FrameTime->SetText( VarArgs( "fps: %4.1f, ms: %8.7f", 1.0f/max( 0.00001f, _frametime ), _frametime ) );
+	m_pLabel_FrameTime->SetText( VarArgs( "fps: %4.1f, ms: %8.7f", 1.0f/MAX( 0.00001f, _frametime ), _frametime ) );
 
 	if ( m_bPainting )
 		input()->SetCursorOveride( dc_hand );

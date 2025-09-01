@@ -293,7 +293,6 @@ int EditorPostProcessingEffect::LoadPostProcessingChain( const char *Path, bool 
 	delete [] pszPath;
 	DestroySolverStack( hSolverArray );
 
-	this->bStartEnabled = bStartEnabled;
 	bIsEnabled = bStartEnabled;
 	AutoCopyStringPtr( Path, &pszPath );
 

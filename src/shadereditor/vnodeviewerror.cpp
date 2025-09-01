@@ -101,7 +101,7 @@ void CNodeViewError::PerformLayout()
 	{
 		float move = (m_iTallGoal - m_iTallCur) * gpGlobals->frametime * 10.0f;
 		int dir = (move>0)?1:-1;
-		move = max( 1, min( abs(m_iTallGoal-m_iTallCur), abs(move) ) ) * dir;
+		move = MAX( 1, MIN( abs(m_iTallGoal-m_iTallCur), abs(move) ) ) * dir;
 		m_iTallCur += move;
 	}
 	else if ( IsClosing() )

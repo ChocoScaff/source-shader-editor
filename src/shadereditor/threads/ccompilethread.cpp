@@ -403,15 +403,15 @@ int CCompileThread::Run()
 				{
 
 #if SHOW_SEDIT_ERRORS
-	bool bHasLookupSolver = false;
-	bool bHasTextureIdentifier = _shaderData->shader->pPS_Identifiers->hList_Textures.Count() > 0;
-	{
-		CUtlVector< CHLSL_SolverBase* > &solvers = *_solvers_ps;
-		for ( int i = 0; i < solvers.Count(); i++ )
-			if ( dynamic_cast< CHLSL_Solver_TextureSample* >( solvers[i] ) )
-				bHasLookupSolver = true;
-	}
-	Assert( !bHasLookupSolver || bHasLookupSolver == bHasTextureIdentifier );
+					bool bHasLookupSolver = false;
+					bool bHasTextureIdentifier = _shaderData->shader->pPS_Identifiers->hList_Textures.Count() > 0;
+					{
+						CUtlVector< CHLSL_SolverBase* > &solvers = *_solvers_ps;
+						for (int j = 0; j < solvers.Count(); j++ )
+							if ( dynamic_cast< CHLSL_Solver_TextureSample* >( solvers[j] ) )
+								bHasLookupSolver = true;
+					}
+					Assert( !bHasLookupSolver || bHasLookupSolver == bHasTextureIdentifier );
 #endif
 
 					ResetVariables( *_solvers_ps );
@@ -560,9 +560,10 @@ void CCompileThread::WriteCommon( bool bPS, CUtlBufferEditor &buf, CUtlVector< C
 	bool bHACK_AddVertexID = false;
 
 	// COMBOS
-	for ( int t = 0; t < Context.m_pActive_Identifiers->hList_Combos.Count(); t++ )
+	int i;
+	for ( i = 0; i < Context.m_pActive_Identifiers->hList_Combos.Count(); i++ )
 	{
-		SimpleCombo *combo = Context.m_pActive_Identifiers->hList_Combos[t];
+		SimpleCombo *combo = Context.m_pActive_Identifiers->hList_Combos[i];
 		//if ( Context.bPreview && ( combo->iComboType != HLSLCOMBO_VERTEXCOMPRESSION || bPosOverride ) )
 		if ( Context.bPreview && ( !combo->bInPreviewMode || bPosOverride ) )
 		{
@@ -594,9 +595,9 @@ void CCompileThread::WriteCommon( bool bPS, CUtlBufferEditor &buf, CUtlVector< C
 	}
 
 	// SAMPLERS
-	for ( int t = 0; t < Context.m_pActive_Identifiers->hList_Textures.Count(); t++ )
+	for (i = 0; i < Context.m_pActive_Identifiers->hList_Textures.Count(); i++ )
 	{
-		SimpleTexture *tex = Context.m_pActive_Identifiers->hList_Textures[t];
+		SimpleTexture *tex = Context.m_pActive_Identifiers->hList_Textures[i];
 		char samp[MAXTARGC];
 		switch ( tex->iTextureMode )
 		{
@@ -627,7 +628,7 @@ void CCompileThread::WriteCommon( bool bPS, CUtlBufferEditor &buf, CUtlVector< C
 	}
 
 	// ENVIRONMENT CONSTANTS
-	for ( int i = 0; i < Context.m_pActive_Identifiers->hList_EConstants.Count(); i++ )
+	for ( i = 0; i < Context.m_pActive_Identifiers->hList_EConstants.Count(); i++ )
 	{
 		SimpleEnvConstant *pConst = Context.m_pActive_Identifiers->hList_EConstants[i];
 		char szConst[MAXTARGC];
@@ -714,14 +715,14 @@ void CCompileThread::WriteCommon( bool bPS, CUtlBufferEditor &buf, CUtlVector< C
 	}
 
 	// ARRAYS
-	for ( int i = 0; i < Context.m_pActive_Identifiers->hList_Arrays.Count(); i++ )
+	for ( i = 0; i < Context.m_pActive_Identifiers->hList_Arrays.Count(); i++ )
 	{
 		char tmp[MAXTARGC];
 		char szAppend[ MAXTARGC ];
 		SimpleArray *pArray = Context.m_pActive_Identifiers->hList_Arrays[i];
 		const bool bIs2D = pArray->iSize_Y > 1;
 		const char *szDataType = ::GetVarTypeNameCode( pArray->iNumComps );
-		Q_snprintf( tmp, sizeof( tmp ), "static const %s g_cArray_%i", szDataType, pArray->iIndex );
+		Q_snprintf( tmp, sizeof( tmp ), "static const %s g_cArray_%i", szDataType, (int) pArray->iIndex );
 		if ( bIs2D )
 			Q_snprintf( szAppend, sizeof( szAppend ), "[%i][%i] =\n", pArray->iSize_X, pArray->iSize_Y );
 		else
@@ -755,7 +756,7 @@ void CCompileThread::WriteCommon( bool bPS, CUtlBufferEditor &buf, CUtlVector< C
 	}
 
 	// CODE
-	for ( int i = 0; i < m_hSolvers.Count(); i++ )
+	for ( i = 0; i < m_hSolvers.Count(); i++ )
 	{
 		CHLSL_SolverBase *solver = m_hSolvers[ i ];
 		solver->Invoke_WriteFXC( bPS, Context );
@@ -1095,7 +1096,7 @@ bool CCompileThread::StartCompiler()
 #define BUFSIZE 4096
 			DWORD dwRead;
 			CHAR chBuf[BUFSIZE];
-			BOOL bSuccess = FALSE;
+			bSuccess = FALSE;
 #	if 1
 			for (;;)
 			{ 

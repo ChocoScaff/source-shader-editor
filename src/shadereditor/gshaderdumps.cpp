@@ -292,7 +292,7 @@ KeyValues *__AllocKV_EConst( int i, SimpleEnvConstant *c )
 	pKV->SetInt( "i_econstsize", c->iConstSize );
 	pKV->SetInt( "i_smartcomps", c->iSmartNumComps );
 	pKV->SetString( "sz_smartname", c->szSmartHelper );
-	for ( int i = 0; i < 4; i++ )
+	for ( i = 0; i < 4; i++ )
 	{
 		char tmpdef[MAX_PATH];
 		Q_snprintf( tmpdef, MAX_PATH, "fl_smartdefault_%02i", i );

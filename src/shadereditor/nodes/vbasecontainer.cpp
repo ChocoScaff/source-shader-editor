@@ -53,7 +53,7 @@ void CBaseContainerNode::UpdateSize()
 	float sizeMin = ( JACK_SIZE_Y + JACK_DELTA_Y ) * maxJacks + JACK_SIZE_Y;
 	sizeMin = max( m_flMinSizeY, sizeMin );
 	m_vecBorderInfo.Init();
-	m_vecSize.Init( max( m_flMinSizeX, 0 ), -sizeMin );
+	m_vecSize.Init( MAX( m_flMinSizeX, 0 ), -sizeMin );
 	TouchJacks();
 	//UpdateSimpleObjectBounds( m_vecPosition, m_vecSize, m_vecBounds );
 	UpdateContainerBounds();
@@ -174,17 +174,17 @@ void CBaseContainerNode::OnDrag( Vector2D &delta )
 
 	if ( m_vecContainerExtents[ 0 ] < m_flMinSizeY )
 	{
-		m_vecAccumulatedExtent[ 0 ] += min( m_vecContainerExtents[ 0 ] - m_flMinSizeY, 0 );
-		m_vecAccumulatedExtent[ 4 ] -= min( m_vecContainerExtents[ 0 ] - m_flMinSizeY, 0 ) * Sign( pos_delta.y );
+		m_vecAccumulatedExtent[ 0 ] += MIN( m_vecContainerExtents[ 0 ] - m_flMinSizeY, 0 );
+		m_vecAccumulatedExtent[ 4 ] -= MIN( m_vecContainerExtents[ 0 ] - m_flMinSizeY, 0 ) * Sign( pos_delta.y );
 
 		float _save = oldExtents.x - m_flMinSizeY;
-		_save = max( _save, 0 );
+		_save = MAX( _save, 0 );
 		pos_delta.y = _save * Sign( pos_delta.y );
 		m_vecContainerExtents[ 0 ] = m_flMinSizeY;
 	}
 	if ( m_vecContainerExtents[ 2 ] > -m_flMinSizeY )
 	{
-		m_vecAccumulatedExtent[ 2 ] -= min( abs(m_vecContainerExtents[ 2 ]) - (m_flMinSizeY), 0 );
+		m_vecAccumulatedExtent[ 2 ] -= MIN( abs(m_vecContainerExtents[ 2 ]) - (m_flMinSizeY), 0 );
 		m_vecContainerExtents[ 2 ] = -m_flMinSizeY;
 	}
 	if ( m_vecContainerExtents[ 1 ] < m_flMinSizeX )
@@ -192,11 +192,11 @@ void CBaseContainerNode::OnDrag( Vector2D &delta )
 		if ( pos_delta.x > 0 )
 		{
 			float _save = oldExtents.y - m_flMinSizeX;
-			_save = max( _save, 0 );
+			_save = MAX( _save, 0 );
 			pos_delta.x = _save;
 		}
-		m_vecAccumulatedExtent[ 3 ] -= min( m_vecContainerExtents[ 1 ] - m_flMinSizeX, 0 );
-		m_vecAccumulatedExtent[ 1 ] += min( m_vecContainerExtents[ 1 ] - m_flMinSizeX, 0 );
+		m_vecAccumulatedExtent[ 3 ] -= MIN( m_vecContainerExtents[ 1 ] - m_flMinSizeX, 0 );
+		m_vecAccumulatedExtent[ 1 ] += MIN( m_vecContainerExtents[ 1 ] - m_flMinSizeX, 0 );
 		m_vecContainerExtents[ 1 ] = m_flMinSizeX;
 	}
 
@@ -213,7 +213,7 @@ void CBaseContainerNode::OnDragEnd()
 	m_iActiveScalingMode = CBORDER_INVALID;
 }
 
-void CBaseContainerNode::SelectAllInBounds( bool bSelected, CUtlVector<CBaseNode*> *hNodes )
+void CBaseContainerNode::SelectAllInBounds(bool bSelected, CUtlVector<CBaseNode*> *hNodes )
 {
 	CUtlVector<CBaseNode*> local;
 	CUtlVector<CBaseNode*> *nodes = hNodes ? hNodes : &local;

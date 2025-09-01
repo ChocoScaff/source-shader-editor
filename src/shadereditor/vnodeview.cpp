@@ -3482,8 +3482,8 @@ void CNodeView::Paint_Grid()
 		Vector2D delta = pos_max - pos_min;
 		delta.y *= -1.0f;
 
-		int num_vertical = max( 1, ceil( abs(delta.x) / GRID_CELL_SIZE ) ) + 1;
-		int num_horizontal = max( 1, ceil( abs(delta.y) / GRID_CELL_SIZE ) ) + 1;
+		int num_vertical = MAX( 1, ceil( abs(delta.x) / GRID_CELL_SIZE ) ) + 1;
+		int num_horizontal = MAX( 1, ceil( abs(delta.y) / GRID_CELL_SIZE ) ) + 1;
 
 		float startx = ceil( pos_min.x / GRID_CELL_SIZE ) * GRID_CELL_SIZE;
 		float starty = floor( pos_min.y / GRID_CELL_SIZE ) * GRID_CELL_SIZE;
@@ -3500,7 +3500,7 @@ void CNodeView::Paint_Grid()
 		Vector2D thickness( 2.5f, 0 );
 		ToPanelSpace( orig );
 		ToPanelSpace( thickness );
-		thickness.x = max( 1, thickness.x - orig.x ) * 0.5f;
+		thickness.x = MAX( 1, thickness.x - orig.x ) * 0.5f;
 
 		tmp1 -= tmp2;
 

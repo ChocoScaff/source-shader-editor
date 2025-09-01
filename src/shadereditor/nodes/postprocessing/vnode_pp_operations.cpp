@@ -217,7 +217,7 @@ int CNodePP_CopyRT::UpdateInputsValid()
 	int baseerror = BaseClass::UpdateInputsValid();
 
 	int localerror = ( GetJack_In(0)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE;
-	localerror = max( localerror, ( GetJack_In(2)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE );
+	localerror = MAX( localerror, ( GetJack_In(2)->GetNumBridgesConnected() < 1 ) ? ERRORLEVEL_UNDEFINED : ERRORLEVEL_NONE );
 
 	return max( baseerror, localerror );
 }

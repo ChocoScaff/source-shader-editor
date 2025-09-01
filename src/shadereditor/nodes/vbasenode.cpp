@@ -555,11 +555,11 @@ void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesPro
 	for ( int i = 0; i < GetNumContainers(); i++ )
 	{
 		if ( RecursiveTestContainerError( false, GetContainer(i) ) )
-			inputErrorLevel = max( inputErrorLevel, ERRORLEVEL_FAIL );
+			inputErrorLevel = MAX( inputErrorLevel, ERRORLEVEL_FAIL );
 
 		CBaseContainerNode *ctr_A = GetContainer( i );
 		if ( ctr_A->TestFullHierachyUpdate() )
-			inputErrorLevel = max( inputErrorLevel, ERRORLEVEL_FAIL );
+			inputErrorLevel = MAX( inputErrorLevel, ERRORLEVEL_FAIL );
 
 		for ( int a = 0; a < GetNumContainers(); a++ )
 		{
@@ -568,7 +568,7 @@ void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesPro
 			CBaseContainerNode *ctr_B = GetContainer( a );
 			if ( !ctr_A->HasContainerParent( ctr_B ) &&
 				!ctr_B->HasContainerParent( ctr_A ) )
-				inputErrorLevel = max( inputErrorLevel, ERRORLEVEL_FAIL );
+				inputErrorLevel = MAX( inputErrorLevel, ERRORLEVEL_FAIL );
 		}
 
 		int numContainerContainers = ctr_A->GetNumContainers();
@@ -576,16 +576,16 @@ void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesPro
 		{
 			CBaseContainerNode *ctr_A_A = ctr_A->GetContainer( a );
 			if ( !HasContainerParent( ctr_A_A ) )
-				inputErrorLevel = max( inputErrorLevel, ERRORLEVEL_FAIL );
+				inputErrorLevel = MAX( inputErrorLevel, ERRORLEVEL_FAIL );
 		}
 	}
 
 	if ( !CanBeInContainer() && GetNumContainers() )
-		inputErrorLevel = max( inputErrorLevel, ERRORLEVEL_FAIL );
+		inputErrorLevel = MAX( inputErrorLevel, ERRORLEVEL_FAIL );
 
-	inputErrorLevel = max( inputErrorLevel, PerNodeErrorLevel() );
+	inputErrorLevel = MAX( inputErrorLevel, PerNodeErrorLevel() );
 
-	inputErrorLevel = max( inputErrorLevel, UpdateInputsValid() );
+	inputErrorLevel = MAX( inputErrorLevel, UpdateInputsValid() );
 
 	//if ( inputErrorLevel != ERRORLEVEL_UNDEFINED || GetErrorLevel() == ERRORLEVEL_FAIL )
 	{
@@ -601,7 +601,7 @@ void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesPro
 	}
 
 	if ( bContainerLinkError )
-		inputErrorLevel = max( inputErrorLevel, ERRORLEVEL_FAIL );
+		inputErrorLevel = MAX( inputErrorLevel, ERRORLEVEL_FAIL );
 
 	SetErrorLevel( inputErrorLevel );
 	bool bDeepUpdate = GetErrorLevel() != oldLevel;
@@ -1034,13 +1034,13 @@ void CBaseNode::UpdateSize()
 	m_vecBorderInfo.Init();
 
 	for ( int i = 0; i < m_hInputs.Count(); i++ )
-		m_vecBorderInfo.x = max( m_vecBorderInfo.x, GetJack_In(i)->GetFinalTextInset() );
+		m_vecBorderInfo.x = MAX( m_vecBorderInfo.x, GetJack_In(i)->GetFinalTextInset() );
 	for ( int i = 0; i < m_hOutputs.Count(); i++ )
-		m_vecBorderInfo.y = max( m_vecBorderInfo.y, GetJack_Out(i)->GetFinalTextInset() );
+		m_vecBorderInfo.y = MAX( m_vecBorderInfo.y, GetJack_Out(i)->GetFinalTextInset() );
 
 	float addSize = IsPreviewVisible() ? m_flMinSizePREVIEW_X : 0;
 
-	float localminX = max( GetFinalTextSize(), m_flMinSizeX );
+	float localminX = MAX( GetFinalTextSize(), m_flMinSizeX );
 	m_vecSize.Init( max( localminX, addSize + m_vecBorderInfo.x + m_vecBorderInfo.y ), -sizeMin );
 
 	TouchJacks();
@@ -1664,8 +1664,6 @@ bool CBaseNode::VguiDraw( bool bShadow )
 		box_max += offset;
 	}
 
-	const bool bSelected = IsSelected();
-
 	if ( bShadow )
 		surface()->DrawSetColor( NODE_DRAW_COLOR_SHADOW );
 	else
@@ -1673,7 +1671,7 @@ bool CBaseNode::VguiDraw( bool bShadow )
 		Color colTitleNoShadow = NODE_DRAW_COLOR_TITLE;
 		if ( GetNumContainers() )
 			colTitleNoShadow = NODE_DRAW_COLOR_HASCONTAINER_TITLE;
-		else if ( bSelected )
+		else if (IsSelected() )
 			colTitleNoShadow = NODE_DRAW_COLOR_SELECTED_TITLE;
 		surface()->DrawSetColor( colTitleNoShadow );
 	}
@@ -1683,7 +1681,7 @@ bool CBaseNode::VguiDraw( bool bShadow )
 	if ( !bShadow )
 	{
 		Color boxNoShadow = NODE_DRAW_COLOR_BOX;
-		if ( bSelected )
+		if (IsSelected() )
 			boxNoShadow = NODE_DRAW_COLOR_SELECTED_BOX;
 		else if ( GetNumSolvers() && !HasDummySolvers() )
 			boxNoShadow = NODE_DRAW_COLOR_HASSOLVER_BOX;

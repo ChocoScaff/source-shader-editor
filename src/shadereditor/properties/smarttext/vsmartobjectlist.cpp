@@ -635,32 +635,32 @@ void CSmartObjectList::BuildHelpTexts( char *pStreamCopy, int iSize )
 		if ( hHelpLines.Count() )
 		{
 			CUtlVector< char* >hCleanLines;
-
-			for ( int i = 0; i < hHelpLines.Count(); i++ )
+			int j = 0;
+			for (j = 0; j < hHelpLines.Count(); j++ )
 			{
-				bool bAddLinebreak = i < hHelpLines.Count() - 1;
-				hCleanLines.AddToTail(CopyToDelimiter( hHelpLines[i], '\n', bAddLinebreak ));
+				bool bAddLinebreak = j < hHelpLines.Count() - 1;
+				hCleanLines.AddToTail(CopyToDelimiter( hHelpLines[j], '\n', bAddLinebreak ));
 			}
 
 			int completeLength = 1;
-			for ( int i = 0; i < hCleanLines.Count(); i++ )
+			for (j = 0; j < hCleanLines.Count(); j++ )
 			{
-				if ( hCleanLines[ i ] == NULL )
+				if ( hCleanLines[j] == NULL )
 				{
-					hCleanLines.Remove( i );
-					i--;
+					hCleanLines.Remove(j);
+					j--;
 				}
 
-				completeLength += Q_strlen( hCleanLines[ i ] );
+				completeLength += Q_strlen( hCleanLines[j] );
 			}
 
 			char *pCombined = new char[ completeLength ];
 			pCombined[ 0 ] = '\0';
 
-			for ( int i = 0; i < hCleanLines.Count(); i++ )
+			for (j = 0; j < hCleanLines.Count(); j++ )
 			{
-				Q_strcat( pCombined, hCleanLines[ i ], completeLength );
-				delete [] hCleanLines[ i ];
+				Q_strcat( pCombined, hCleanLines[j], completeLength );
+				delete [] hCleanLines[j];
 			}
 
 			hCleanLines.Purge();
@@ -903,7 +903,7 @@ void CSmartObjectList::Parse_Function( char *pRead, const int iOffset, const int
 				if ( !pParam_Start )
 					pParam_Start = pSearchVarStuff;
 
-				char *pWord = CopyWord( pSearchVarStuff );
+				pWord = CopyWord( pSearchVarStuff );
 
 				if ( !pWord )
 					break;
@@ -994,7 +994,7 @@ void CSmartObjectList::Parse_Function( char *pRead, const int iOffset, const int
 
 		for ( int i = 0; i < hChildren.Count(); i++ )
 		{
-			CSmartObject *p = new CSmartObject( *hChildren[i] );
+			p = new CSmartObject( *hChildren[i] );
 			p->m_iTextOffset = iOffset;
 			p->m_iScopeDepth = iInlineScopeDepth;
 			p->m_iScopeNum = iInlineScopeNum;
@@ -1638,7 +1638,7 @@ void CSmartObjectList::BuildIntrinsicDatatypes()
 
 				Q_snprintf( tmp_dtype, sizeof(tmp_dtype), "%s%d", pszDatatypes[i], d1 );
 				
-				CSmartObject *pO = new CSmartObject( ACOMP_FUNC, tmp, tmp_dtype, tmp_dtype );
+				pO = new CSmartObject( ACOMP_FUNC, tmp, tmp_dtype, tmp_dtype );
 				pO->m_bIntrinsic = true;
 				for ( int child = 0; child < d1; child++ )
 					pO->m_hChildren.AddToTail( AllocIntrinsicChild( i, child ) );

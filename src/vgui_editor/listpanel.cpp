@@ -1860,7 +1860,7 @@ void ListPanel::PerformLayout()
 				if (!header->IsVisible())
 					continue;
 
-				int wide = header->GetWide();
+				wide = header->GetWide();
 
 				if ( itemID == m_iEditModeItemID &&
 					 j == m_iEditModeColumn )
@@ -1947,7 +1947,7 @@ void ListPanel::Paint()
 			if (!header->IsVisible())
 				continue;
 
-			int wide = header->GetWide();
+			wide = header->GetWide();
 
 			if (render)
 			{
@@ -2344,7 +2344,7 @@ void ListPanel::OnKeyCodeTyped(KeyCode code)
 	// move the newly selected item to within the visible range
 	if ( nRowsPerPage < nTotalRows )
 	{
-		int nStartItem = m_vbar->GetValue();
+		nStartItem = m_vbar->GetValue();
 		if ( nSelectedRow < nStartItem )
 		{
 			// move the list back to match

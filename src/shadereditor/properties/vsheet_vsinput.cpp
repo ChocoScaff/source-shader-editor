@@ -98,6 +98,9 @@ void CSheet_VSInput::OnSliderMoved( int position )
 
 void CSheet_VSInput::OnCheckButtonChecked( KeyValues *pData )
 {
+	if (!pData)
+		return;
+
 	Panel *pCaller = ((Panel*)pData->GetPtr( "panel" ));
 	bool bState = ( pData->GetInt( "state" ) != 0 );
 

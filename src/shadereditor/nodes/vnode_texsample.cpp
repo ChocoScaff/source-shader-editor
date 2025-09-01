@@ -149,8 +149,8 @@ bool CNodeTexSample::CreateSolvers(GenericShaderData *ShaderData)
 			solver->SetFunction( iLookupOverride );
 
 			solver->SetResourceType( res );
-			for ( int i = 0; i < GetNumJacks_In(); i++ )
-				solver->AddSourceVar( GetJack_In(i)->GetTemporaryVarTarget_End() );
+			for ( int j = 0; j < GetNumJacks_In(); j++ )
+				solver->AddSourceVar( GetJack_In(j)->GetTemporaryVarTarget_End() );
 			solver->AddTargetVar( tg );
 			AddSolver( solver );
 		}

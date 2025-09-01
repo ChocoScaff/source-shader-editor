@@ -445,7 +445,7 @@ void ListFiles( const char *dir, CUtlVector< char* > &hFiles, const char *pszExt
 			hFiles.AddToTail( Addme );
 		}
 
-		const char *tmpFile = g_pFullFileSystem->FindNext( _handle );
+		tmpFile = g_pFullFileSystem->FindNext( _handle );
 		if ( tmpFile )
 			Q_strncpy( curFile, tmpFile, sizeof(curFile) );
 		else

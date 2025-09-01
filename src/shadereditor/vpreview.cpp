@@ -331,7 +331,7 @@ void CPreview::OnFileSelected( KeyValues *pKV )
 			const bool bCubemap = img.IsEnvmap();
 
 			IMaterial *pMat = pEditorRoot->GetBGPreviewMat();
-			KeyValues *pKV = pEditorRoot->GetBGPreviewKV();
+			pKV = pEditorRoot->GetBGPreviewKV();
 			if ( !pMat || !pKV )
 				return;
 

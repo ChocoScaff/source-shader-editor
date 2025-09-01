@@ -572,10 +572,10 @@ bool HTML::OnStartURL(const char *url, const char *target, bool first)
 		if (!strnicmp(m_CustomURLHandlers[i].url, url, strlen(m_CustomURLHandlers[i].url)))
 		{
 			// we have a custom handler
-			Panel *target = m_CustomURLHandlers[i].hPanel;
-			if (target)
+			Panel* targetPanel = m_CustomURLHandlers[i].hPanel;
+			if (targetPanel)
 			{
-				PostMessage(target, new KeyValues("CustomURL", "url", url + strlen(m_CustomURLHandlers[i].url) + 3, "protocol", m_CustomURLHandlers[i].url));
+				PostMessage(targetPanel, new KeyValues("CustomURL", "url", url + strlen(m_CustomURLHandlers[i].url) + 3, "protocol", m_CustomURLHandlers[i].url));
 			}
 
 			bURLHandled = true;

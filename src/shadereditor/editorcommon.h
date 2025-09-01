@@ -984,7 +984,7 @@ public:
 	RTDef();
 	RTDef( const char *pszName,
 		ImageFormat format, RenderTargetSizeMode_t sizemode, MaterialRenderTargetDepth_t depthmode,
-		int x, int y, unsigned int rtflags );
+		int xx, int yy, unsigned int rtflags );
 	~RTDef();
 
 	bool IsValid();
@@ -993,7 +993,7 @@ public:
 	void Deallocate();
 	void Modify( const char *pszName = NULL,
 		ImageFormat *format = NULL, RenderTargetSizeMode_t *sizemode = NULL, MaterialRenderTargetDepth_t *depthmode = NULL,
-		int *x = NULL, int *y = NULL, unsigned int *rtflags = NULL );
+		int *xx = NULL, int *yy = NULL, unsigned int *rtflags = NULL );
 	void Modify( RTDef &src );
 
 	bool IsDirty();

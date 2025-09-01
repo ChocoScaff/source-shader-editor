@@ -112,7 +112,7 @@ void CRenderPanel::OnThink()
 		{
 		case RDRAG_LIGHT:
 			{
-				VMatrix viewInv, viewInvT;
+			VMatrix viewInv;
 				MatrixInverseGeneral( __view, viewInv );
 				matrix3x4_t rot_x, rot_y, rot_comb;
 				Vector fwd, right, up;

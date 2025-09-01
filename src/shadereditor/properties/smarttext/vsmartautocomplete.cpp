@@ -60,7 +60,7 @@ bool CSmartAutocomplete::InitList( CSmartObjectList *list,
 
 		char *pszDatatype = pVar->m_pszDatatype;
 		bool bSuccess = true;
-		bool bSort = true;
+		bSort = true;
 
 		CSmartObjectList *pNewList = new CSmartObjectList();
 

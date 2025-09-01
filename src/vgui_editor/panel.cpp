@@ -5839,7 +5839,7 @@ void Panel::OnFinishDragging( bool mousereleased, MouseCode code, bool abort /*=
 				if ( pHover )
 				{
 					// Figure out if it's a menu item...
-					int c = menu->GetItemCount();
+					c = menu->GetItemCount();
 					for ( int i = 0; i < c; ++i )
 					{
 						int id = menu->GetMenuID( i );
@@ -6264,13 +6264,12 @@ void CDragDropHelperPanel::PostChildPaint()
 			else
 			{
 				CUtlVector< Panel * > temp;
-				CUtlVector< PHandle >& data = panel->GetDragDropInfo()->m_DragPanels;
+				CUtlVector< PHandle >&data2 = panel->GetDragDropInfo()->m_DragPanels;
 				CUtlVector< KeyValues * >& msglist = panel->GetDragDropInfo()->m_DragData;
-				int i, c;
-				c = data.Count();
+				c = data2.Count();
 				for ( i = 0; i < c ; ++i )
 				{
-					Panel *pPanel = data[ i ].Get();
+					Panel *pPanel = data2[ i ].Get();
 					if ( pPanel )
 					{
 						temp.AddToTail( pPanel );

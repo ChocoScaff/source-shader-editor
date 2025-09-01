@@ -673,21 +673,22 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 				{
 					int iNewIndex = 0;
 					int iFoundIndex = -1;
+					int j;
 
-					for ( int i = 0; i < AMT_VMT_STATIC && iFoundIndex < 0; i++ )
+					for (j = 0; j < AMT_VMT_STATIC && iFoundIndex < 0; j++ )
 					{
-						if ( !params[ VPSTATIC_00_NAME + i ]->GetStringValue() )
+						if ( !params[ VPSTATIC_00_NAME + j]->GetStringValue() )
 							continue;
-						if ( !Q_stricmp( params[ VPSTATIC_00_NAME + i ]->GetStringValue(), c->szSmartHelper ) )
-							iFoundIndex = i;
+						if ( !Q_stricmp( params[ VPSTATIC_00_NAME + j]->GetStringValue(), c->szSmartHelper ) )
+							iFoundIndex = j;
 					}
 
 					if ( iFoundIndex < 0 )
 					{
-						for ( int i = 0; i < AMT_VMT_STATIC; i++ )
+						for (j = 0; j < AMT_VMT_STATIC; j++ )
 						{
-							if ( !params[ VPSTATIC_00_NAME + i ]->GetStringValue() ||
-								!*params[ VPSTATIC_00_NAME + i ]->GetStringValue() )
+							if ( !params[ VPSTATIC_00_NAME + j]->GetStringValue() ||
+								!*params[ VPSTATIC_00_NAME + j]->GetStringValue() )
 								break;
 							iNewIndex++;
 						}

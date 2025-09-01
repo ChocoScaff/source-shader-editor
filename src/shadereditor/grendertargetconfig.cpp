@@ -20,7 +20,7 @@ RTDef::RTDef()
 
 RTDef::RTDef( const char *pszName,
 	ImageFormat format, RenderTargetSizeMode_t sizemode, MaterialRenderTargetDepth_t depthmode,
-	int x, int y, unsigned int rtflags )
+	int xx, int yy, unsigned int rtflags )
 {
 	Assert( pszName && *pszName );
 
@@ -119,7 +119,7 @@ void RTDef::Modify( RTDef &src )
 
 void RTDef::Modify( const char *pszName,
 		ImageFormat *format, RenderTargetSizeMode_t *sizemode, MaterialRenderTargetDepth_t *depthmode,
-		int *x, int *y, unsigned int *rtflags )
+		int *xx, int *yy, unsigned int *rtflags )
 {
 	bool bChanges = false;
 	if ( pszName != NULL && Q_strlen( pszName ) )
@@ -154,14 +154,14 @@ void RTDef::Modify( const char *pszName,
 
 	if ( x != NULL )
 	{
-		bChanges = bChanges || this->x != *x;
-		this->x = *x;
+		bChanges = bChanges || this->x != *xx;
+		this->x = *xx;
 	}
 
 	if ( y != NULL )
 	{
-		bChanges = bChanges || this->y != *y;
-		this->y = *y;
+		bChanges = bChanges || this->y != *yy;
+		this->y = *yy;
 	}
 
 	if ( bChanges )
