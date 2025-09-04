@@ -28,7 +28,6 @@ float GetEditorTime()
 
 #include "view_shared.h"
 #include "materialsystem/imesh.h"
-#include "vgui_controls/MessageBox.h"
 
 void ForceTerminateCompilers()
 {
