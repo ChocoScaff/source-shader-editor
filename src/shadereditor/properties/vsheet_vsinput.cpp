@@ -96,13 +96,13 @@ void CSheet_VSInput::OnSliderMoved( int position )
 		m_pCBox_DType_Color[d]->SetEnabled( numCol - 1 >= d );
 }
 
-void CSheet_VSInput::OnCheckButtonChecked( KeyValues *pData )
+void CSheet_VSInput::OnCheckButtonChecked( KeyValues *pKV  )
 {
-	if (!pData)
+	if (!pKV)
 		return;
 
-	Panel *pCaller = ((Panel*)pData->GetPtr( "panel" ));
-	bool bState = ( pData->GetInt( "state" ) != 0 );
+	Panel *pCaller = ((Panel*)pKV->GetPtr( "panel" ));
+	bool bState = (pKV->GetInt( "state" ) != 0 );
 
 	if ( !pCaller )
 		return;

@@ -213,7 +213,7 @@ void CBaseContainerNode::OnDragEnd()
 	m_iActiveScalingMode = CBORDER_INVALID;
 }
 
-void CBaseContainerNode::SelectAllInBounds(bool bSelected, CUtlVector<CBaseNode*> *hNodes )
+void CBaseContainerNode::SelectAllInBounds(bool bSetSelected, CUtlVector<CBaseNode*> *hNodes )
 {
 	CUtlVector<CBaseNode*> local;
 	CUtlVector<CBaseNode*> *nodes = hNodes ? hNodes : &local;
@@ -236,9 +236,9 @@ void CBaseContainerNode::SelectAllInBounds(bool bSelected, CUtlVector<CBaseNode*
 			continue;
 
 		nodes->AddToTail( n );
-		n->SetSelected( bSelected );
+		n->SetSelected(bSetSelected);
 		if ( n->GetAsContainer() != NULL )
-			n->GetAsContainer()->SelectAllInBounds( bSelected, nodes );
+			n->GetAsContainer()->SelectAllInBounds(bSetSelected, nodes );
 	}
 }
 
@@ -674,7 +674,7 @@ bool CBaseContainerNode::VguiDraw( bool bShadow )
 		box_max += offset;
 	}
 
-	const bool bSelected = IsSelected();
+	const bool bSetSelected = IsSelected();
 
 	if ( bShadow )
 		surface()->DrawSetColor( NODE_DRAW_COLOR_SHADOW );
@@ -683,7 +683,7 @@ bool CBaseContainerNode::VguiDraw( bool bShadow )
 		Color colTitleNoShadow = NODE_DRAW_COLOR_TITLE;
 		if ( GetNumContainers() )
 			colTitleNoShadow = NODE_DRAW_COLOR_HASCONTAINER_TITLE;
-		else if ( bSelected )
+		else if (bSetSelected)
 			colTitleNoShadow = NODE_DRAW_COLOR_SELECTED_TITLE;
 		surface()->DrawSetColor( colTitleNoShadow );
 	}
@@ -693,7 +693,7 @@ bool CBaseContainerNode::VguiDraw( bool bShadow )
 	if ( !bShadow )
 	{
 		Color boxNoShadow = NODE_DRAW_COLOR_BOX;
-		if ( bSelected )
+		if (bSetSelected)
 			boxNoShadow = NODE_DRAW_COLOR_SELECTED_BOX;
 		else if ( GetNumSolvers() && !HasDummySolvers() )
 			boxNoShadow = NODE_DRAW_COLOR_HASSOLVER_BOX;

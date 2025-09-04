@@ -95,6 +95,7 @@ void CNodeViewError::DoClose()
 
 void CNodeViewError::PerformLayout()
 {
+
 	BaseClass::PerformLayout();
 
 	if ( IsAnimating() )
@@ -115,18 +116,19 @@ void CNodeViewError::PerformLayout()
 	int px, py;
 	CNodeView *p = assert_cast< CNodeView* >( GetParent() );
 	p->GetSize( px, py );
+	CNodeViewError *pErrorLabel;
 
 	int posx = px - m_iWide - ERROR_DISTANCE;
 	int posy = py;
 
 	for ( int i = p->GetNumUserErrorLabels() - 1; i >= 0; i-- )
 	{
-		CNodeViewError *pL = p->GetUserErrorLabel( i );
-		if ( pL == this )
+		pErrorLabel = p->GetUserErrorLabel( i );
+		if (pErrorLabel == this )
 			break;
 
 		int lx, ly;
-		pL->GetSize( lx, ly );
+		pErrorLabel->GetSize( lx, ly );
 
 		posy -= ly;
 		posy -= ERROR_DISTANCE;

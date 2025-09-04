@@ -1,6 +1,8 @@
 #ifndef CSHEET_STD_VLIGHT_H
 #define CSHEET_STD_VLIGHT_H
 
+#pragma once
+
 #include "vSheets.h"
 
 

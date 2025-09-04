@@ -28,18 +28,18 @@ void CSheet_Std_VLight::OnApplyChanges()
 	pData->SetInt( "i_vlight_hl", m_pCheck_Halflambert->IsSelected() ? 1 : 0 );
 }
 
-void CSheet_Std_VLight::OnCheckButtonChecked( KeyValues *pData )
+void CSheet_Std_VLight::OnCheckButtonChecked(KeyValues* pKV)
 {
-	if (!pData)
+	if (!pKV)
 		return;
 
-	Panel *pCaller = ((Panel*)pData->GetPtr( "panel" ));
-	bool bState = ( pData->GetInt( "state" ) != 0 );
+	Panel* pCaller = ((Panel*)pKV->GetPtr("panel"));
+	bool bState = (pKV->GetInt("state") != 0);
 
-	if ( pCaller && pCaller == m_pCheck_StaticLighting )
+	if (pCaller && pCaller == m_pCheck_StaticLighting)
 	{
-		m_pCheck_Halflambert->SetEnabled( bState );
-		if ( !bState )
-			m_pCheck_Halflambert->SetSelected( bState );
+		m_pCheck_Halflambert->SetEnabled(bState);
+		if (!bState)
+			m_pCheck_Halflambert->SetSelected(bState);
 	}
 }

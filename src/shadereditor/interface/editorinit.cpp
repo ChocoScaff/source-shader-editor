@@ -891,7 +891,7 @@ void CheckDirectories()
 	Q_snprintf( checkSCompile, MAX_PATH, "%s\\shadercompile.exe", GetBinaryPath() );
 	if ( !g_pFullFileSystem->FileExists( checkSCompile ) )
 	{
-		vgui::PromptSimple *prompt = new vgui::PromptSimple( pEditorRoot, "ERROR" );
+		vgui::PromptSimple *Sprompt = new vgui::PromptSimple( pEditorRoot, "ERROR" );
 
 		int screenx,screeny;
 		engine->GetScreenSize(screenx,screeny);
@@ -902,8 +902,8 @@ void CheckDirectories()
 		screenx -= promptsizex / 2;
 		screeny -= promptsizey / 2;
 
-		prompt->SetSize( promptsizex, promptsizey );
-		prompt->SetPos( screenx,screeny );
+		Sprompt->SetSize( promptsizex, promptsizey );
+		Sprompt->SetPos( screenx,screeny );
 
 		char errormsg[MAXTARGC];
 		if ( !g_pFullFileSystem->IsDirectory( GetBinaryPath() ) )
@@ -911,11 +911,11 @@ void CheckDirectories()
 		else
 			Q_snprintf( errormsg, MAXTARGC, "shadercompile.exe cannot be found at %s! Try reinstalling the Source SDK.", GetBinaryPath() );
 
-		prompt->SetText( errormsg );
-		prompt->AddButton( "Ok", "onclose_prompt" );
+		Sprompt->SetText( errormsg );
+		Sprompt->AddButton( "Ok", "onclose_prompt" );
 
-		prompt->MakeReadyForUse();
-		prompt->InvalidateLayout( true, true );
+		Sprompt->MakeReadyForUse();
+		Sprompt->InvalidateLayout( true, true );
 	}
 }
 

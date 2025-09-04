@@ -284,7 +284,7 @@ EditorPostProcessingEffect::EditorPostProcessingEffect( const EditorPostProcessi
 	if ( o.hSolverArray.Count() )
 		CopySolvers( o.hSolverArray, hSolverArray );
 }
-int EditorPostProcessingEffect::LoadPostProcessingChain( const char *Path, bool bStartEnabled )
+int EditorPostProcessingEffect::LoadPostProcessingChain( const char *Path, bool bSetStartEnabled )
 {
 	if ( !Path || !*Path )
 		return CPostProcessingCache::PPE_INVALID_INPUT;
@@ -293,7 +293,7 @@ int EditorPostProcessingEffect::LoadPostProcessingChain( const char *Path, bool 
 	delete [] pszPath;
 	DestroySolverStack( hSolverArray );
 
-	bIsEnabled = bStartEnabled;
+	bIsEnabled = bSetStartEnabled;
 	AutoCopyStringPtr( Path, &pszPath );
 
 	char fileBase[MAX_PATH*4];
